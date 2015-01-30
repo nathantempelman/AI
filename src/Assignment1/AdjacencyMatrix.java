@@ -227,6 +227,12 @@ public class AdjacencyMatrix {
 		int current=end;
 		path.add(current);
 		int weight = 0;
+		int visiteds = 0;
+		for(int i = 0; i<visited.length;i++)
+		{
+			if(visited[i]!=-1)
+				visiteds++;
+		}
 		while(true)
 		{
 			if(current!=start)
@@ -242,7 +248,7 @@ public class AdjacencyMatrix {
 		}
 		Collections.reverse(path);
 		StringBuilder b = new StringBuilder();
-		b.append(path.size() +" nodes visited, total cost is "+weight+". Path is ");
+		b.append(path.size() +" nodes in the path, "+ visiteds +" nodes visited, total cost is "+weight+". Path is ");
 		Iterator<Integer> i = path.iterator();
 		while(true)
 		{
