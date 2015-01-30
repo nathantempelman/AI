@@ -40,8 +40,8 @@ public class Runner {
 				break;
 		}
 
-		System.out.println("bfs path from "+start+ " to " +end+ " is "+romania.breadthFirstSearchWithPath(starti, endi));
-		System.out.println("dfs path from "+start+ " to " +end+ " is "+romania.depthFirstSearchWithPath(starti, endi));
+		System.out.println("bfs path from "+start+ " to " +end+ ": "+romania.breadthFirstSearchWithPath(starti, endi));
+		System.out.println("dfs path from "+start+ " to " +end+ ": "+romania.depthFirstSearchWithPath(starti, endi));
 		
 		input.close();
 	}

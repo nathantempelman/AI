@@ -221,15 +221,17 @@ public class AdjacencyMatrix {
 	}
 	public String turnVisitedArrayIntoString(int start, int end, int[] visited, boolean useNames)
 	{
-		printArray(visited);
+		//printArray(visited);
 		
 		List<Integer> path = new ArrayList<Integer>();
 		int current=end;
 		path.add(current);
+		int weight = 0;
 		while(true)
 		{
 			if(current!=start)
 			{
+				weight+=mat[current][visited[current]];
 				current = visited[current];
 				path.add(current);
 			}
@@ -240,7 +242,7 @@ public class AdjacencyMatrix {
 		}
 		Collections.reverse(path);
 		StringBuilder b = new StringBuilder();
-		b.append("Path is ");
+		b.append(path.size() +" nodes visited, total cost is "+weight+". Path is ");
 		Iterator<Integer> i = path.iterator();
 		while(true)
 		{
