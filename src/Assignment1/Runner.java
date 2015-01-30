@@ -1,20 +1,49 @@
 package Assignment1;
 
+import java.util.Scanner;
+
 public class Runner {
 
 	public static void main(String[] args) {
-		AdjacencyMatrix m = new AdjacencyMatrix(400, 30000);
-		System.out.print("matrix looks like\n");
-		System.out.print(m);
-		System.out.println("1 - 4?"+m.breadthFirstSearch(1, 4));
-		System.out.println("Depth first agrees?"+m.depthFirstSearch(1, 4));
-		System.out.println("And now with the dfs path: "+m.depthFirstSearchWithPath(1, 4));
-		System.out.println("And now with the bfs path: "+m.breadthFirstSearchWithPath(1, 4));
+//		AdjacencyMatrix m = new AdjacencyMatrix(400, 30000);
+//		System.out.print("matrix looks like\n");
+//		System.out.print(m);
+//		System.out.println("1 - 4?"+m.breadthFirstSearch(1, 4));
+//		System.out.println("Depth first agrees?"+m.depthFirstSearch(1, 4));
+//		System.out.println("And now with the dfs path: "+m.depthFirstSearchWithPath(1, 4));
+//		System.out.println("And now with the bfs path: "+m.breadthFirstSearchWithPath(1, 4));
+//		
+		AdjacencyMatrix romania = createRomania();
+		Scanner input = new Scanner(System.in);
+		String start,end;
+		int starti,endi;
+		System.out.println("This is the adjacency map for romania.");
+		System.out.println(romania);
+		System.out.println("Enter the city to start the search from");
+		while(true)
+		{	
+			start = input.nextLine();
+			starti = romania.getIndexOf(start);
+			if(starti==-1)
+				System.out.println("City unrecognized. Try again.");
+			else
+				break;
+		}
+		System.out.println("Enter the city to search for");
+		while(true)
+		{	
+			end = input.nextLine();
+			endi = romania.getIndexOf(end);
+			if(endi==-1)
+				System.out.println("City unrecognized. Try again.");
+			else
+				break;
+		}
+
+		System.out.println("bfs path from "+start+ " to " +end+ " is "+romania.breadthFirstSearchWithPath(starti, endi));
+		System.out.println("dfs path from "+start+ " to " +end+ " is "+romania.depthFirstSearchWithPath(starti, endi));
 		
-		AdjacencyMatrix m2 = createRomania();
-		System.out.println(m2);
-		System.out.println("bfs path from Oradea to Urziceni"+m2.breadthFirstSearchWithPath(0, 14));
-		System.out.println("dfs path from Oradea to Urziceni"+m2.depthFirstSearchWithPath(0, 14));
+		input.close();
 	}
 
 	private static AdjacencyMatrix createRomania() {

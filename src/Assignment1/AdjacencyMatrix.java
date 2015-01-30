@@ -135,7 +135,7 @@ public class AdjacencyMatrix {
 			int current = q.removeFirst();
 			if(current == end)
 			{
-				return turnVisitedArrayIntoString(start, end, visitedFrom);
+				return turnVisitedArrayIntoString(start, end, visitedFrom, true);
 			}
 			for(int i = 0;i<vertices;i++)
 			{
@@ -203,7 +203,7 @@ public class AdjacencyMatrix {
 			int current = q.removeLast();
 			if(current == end)
 			{
-				return turnVisitedArrayIntoString(start, end, visitedFrom);
+				return turnVisitedArrayIntoString(start, end, visitedFrom, true);
 			}
 			for(int i = 0;i<vertices;i++)
 			{
@@ -219,8 +219,10 @@ public class AdjacencyMatrix {
 		
 		return "No Path Possible";
 	}
-	public String turnVisitedArrayIntoString(int start, int end, int[] visited)
+	public String turnVisitedArrayIntoString(int start, int end, int[] visited, boolean useNames)
 	{
+		printArray(visited);
+		
 		List<Integer> path = new ArrayList<Integer>();
 		int current=end;
 		path.add(current);
@@ -242,7 +244,10 @@ public class AdjacencyMatrix {
 		Iterator<Integer> i = path.iterator();
 		while(true)
 		{
-			b.append(i.next());
+			if(useNames)
+				b.append(vNames[i.next()]);
+			else
+				b.append(i.next());
 			if(i.hasNext())
 				b.append(" -> ");
 			else
@@ -254,33 +259,21 @@ public class AdjacencyMatrix {
 	// frontier [ , , ]
 	public boolean uniformCostSearch(int start, int end)
 	{
-		LinkedList<Integer> q = new LinkedList<Integer>();
-		boolean[] checked = new boolean[vertices];
-		if(start == end)
-			return true;
-		checked[start]=true;
-		q.add(start);
 		
-		while(!q.isEmpty())
-		{
-			int current = q.removeFirst();
-			if(current == end)
-			{
-				return true;
-			}
-			for(int i = 0;i<vertices;i++)
-			{
-				
-				if(mat[current][i]!=0 && checked[i]==false )
-				{
-					checked[i]=true;
-					q.add(i);
-				}
-			}
-		}
 		
 		return false;
 	}
+	
+	public void printArray(int[] array)
+	{
+		System.out.print("[");
+		for(int i = 0; i<array.length;i++)
+		{
+			System.out.print(array[i]+",");
+		}
+		System.out.print("]");
+	}
+	
 	
 	
 }
