@@ -1,9 +1,11 @@
 package Assignment1;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
 
 
 public class AdjacencyMatrix {
@@ -12,6 +14,13 @@ public class AdjacencyMatrix {
 	int edges;
 	int vertices;
 	
+	//comparator for uniform cost search priority queue
+	static class LowestCost implements Comparator<int[]> {
+		 
+		public int compare(int[] one, int[] two) {
+			return  one[1]-two[1];
+		}
+	}
 	// construct random AdjacencyMatrix
 	public AdjacencyMatrix(int vertices, int edges)
 	{
@@ -118,6 +127,8 @@ public class AdjacencyMatrix {
 	}
 	public String breadthFirstSearchWithPath(int start, int end)
 	{
+		int maxNodesInMemory = 0;
+		
 		LinkedList<Integer> q = new LinkedList<Integer>();
 		boolean[] checked = new boolean[vertices];
 		int[] visitedFrom = new int[vertices];
@@ -135,7 +146,7 @@ public class AdjacencyMatrix {
 			int current = q.removeFirst();
 			if(current == end)
 			{
-				return turnVisitedArrayIntoString(start, end, visitedFrom, true);
+				return maxNodesInMemory+" was the maximum number of nodes in memory. " +turnVisitedArrayIntoString(start, end, visitedFrom, true);
 			}
 			for(int i = 0;i<vertices;i++)
 			{
@@ -147,6 +158,7 @@ public class AdjacencyMatrix {
 					q.add(i);
 				}
 			}
+			if(q.size()>maxNodesInMemory) maxNodesInMemory=q.size();
 		}
 		
 		return "No Path Possible";
@@ -186,6 +198,8 @@ public class AdjacencyMatrix {
 	}
 	public String depthFirstSearchWithPath(int start, int end)
 	{
+		int maxNodesInMemory = 0;
+		
 		LinkedList<Integer> q = new LinkedList<Integer>();
 		boolean[] checked = new boolean[vertices];
 		int[] visitedFrom = new int[vertices];
@@ -203,7 +217,7 @@ public class AdjacencyMatrix {
 			int current = q.removeLast();
 			if(current == end)
 			{
-				return turnVisitedArrayIntoString(start, end, visitedFrom, true);
+				return maxNodesInMemory+" was the maximum number of nodes in memory. " +turnVisitedArrayIntoString(start, end, visitedFrom, true);
 			}
 			for(int i = 0;i<vertices;i++)
 			{
@@ -215,6 +229,7 @@ public class AdjacencyMatrix {
 					q.add(i);
 				}
 			}
+			if(q.size()>maxNodesInMemory) maxNodesInMemory=q.size();
 		}
 		
 		return "No Path Possible";
@@ -265,11 +280,44 @@ public class AdjacencyMatrix {
 	}
 	// cost     [ , , ]
 	// frontier [ , , ]
-	public boolean uniformCostSearch(int start, int end)
+	public String uniformCostSearch(int start, int end)
 	{
+		if(start == end)
+			return "Start and end are the same";
 		
+		int maxNodesInMemory = 0;
+		LowestCost lc = new LowestCost();
+		PriorityQueue<int[]> q = new PriorityQueue<int[]>(lc);
+		boolean[] checked = new boolean[vertices];
+		int[] visitedFrom = new int[vertices];
+		for(int i = 0;i<vertices;i++)
+		{
+			visitedFrom[i]=-1;
+		}
+		checked[start]=true;
+		q.add(new int[]{start,0});
 		
-		return false;
+		while(!q.isEmpty())
+		{
+			int[] current = q.poll();
+			if(current[0] == end)
+			{
+				return maxNodesInMemory+" was the maximum number of nodes in memory. " +turnVisitedArrayIntoString(start, end, visitedFrom, true);
+			}
+			for(int i = 0;i<vertices;i++)
+			{
+				
+				if(mat[current[0]][i]!=0 && checked[i]==false)
+				{
+					checked[i]=true;;
+					visitedFrom[i]=current[0];
+					q.add(new int[]{i,current[1]+mat[current[0]][i]});
+				}
+			}
+			if(q.size()>maxNodesInMemory) maxNodesInMemory=q.size();
+		}
+		
+		return "No Path Possible";
 	}
 	
 	public void printArray(int[] array)
@@ -281,7 +329,7 @@ public class AdjacencyMatrix {
 		}
 		System.out.print("]");
 	}
-	
+	 
 	
 	
 }

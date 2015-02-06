@@ -42,6 +42,7 @@ public class Runner {
 
 		System.out.println("bfs path from "+start+ " to " +end+ ": "+romania.breadthFirstSearchWithPath(starti, endi));
 		System.out.println("dfs path from "+start+ " to " +end+ ": "+romania.depthFirstSearchWithPath(starti, endi));
+		System.out.println("UCS path from "+start+ " to " +end+ ": "+romania.uniformCostSearch(starti, endi));
 		
 		input.close();
 	}
