@@ -70,8 +70,21 @@ public class AdjacencyMatrix {
 	public String toString()
 	{
 		StringBuilder str = new StringBuilder();
+		int maxNameLength = -1;
 		for(int i = 0;i<vertices;i++)
 		{
+			if(vNames[i].length()!=0&&vNames[i].length()>maxNameLength)
+				maxNameLength=vNames[i].length();
+		}
+		for(int i = 0;i<vertices;i++)
+		{
+			if(maxNameLength!=-1)
+			{
+				str.append(vNames[i]);
+				for(int j=vNames[i].length();j<maxNameLength;j++)
+					str.append(" ");
+				str.append("\t");
+			}
 			for(int j = 0; j<vertices;j++)
 			{
 				str.append(mat[i][j]+"\t");
