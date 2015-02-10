@@ -17,6 +17,7 @@ public class Runner {
 		Scanner input = new Scanner(System.in);
 		String start,end;
 		int starti,endi;
+		boolean validInput = false;
 		System.out.println("This is the adjacency map for romania.");
 		System.out.println(romania);
 		System.out.println("Enter the city to start the search from");
@@ -39,12 +40,28 @@ public class Runner {
 			else
 				break;
 		}
-
-		System.out.println("bfs path from "+start+ " to " +end+ ": "+romania.breadthFirstSearchWithPath(starti, endi));
-		System.out.println("dfs path from "+start+ " to " +end+ ": "+romania.depthFirstSearchWithPath(starti, endi));
-		System.out.println("UCS path from "+start+ " to " +end+ ": "+romania.uniformCostSearch(starti, endi));
+		System.out.println("Choose search algorithm -> enter 1 for breadth first search, 2 for depth first search, or 3 for uniform cost search");
+		while(true)
+		{	
+			int algSwitch = Integer.parseInt(input.nextLine());
+			
+			switch(algSwitch)
+			{
+				case 1:	System.out.println("bfs path from "+start+ " to " +end+ ": "+romania.breadthFirstSearchWithPath(starti, endi));
+						input.close();
+						return;
+				case 2: System.out.println("dfs path from "+start+ " to " +end+ ": "+romania.depthFirstSearchWithPath(starti, endi));
+						input.close();
+						return;
+				case 3: System.out.println("UCS path from "+start+ " to " +end+ ": "+romania.uniformCostSearch(starti, endi));
+						input.close();
+						return;
+				default: System.out.println("Input unrecognized. Try again.");
+						break;
+			}
+				
+		}
 		
-		input.close();
 	}
 
 	private static AdjacencyMatrix createRomania() {
