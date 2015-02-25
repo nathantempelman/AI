@@ -17,7 +17,6 @@ public class Runner {
 		Scanner input = new Scanner(System.in);
 		String start,end;
 		int starti,endi;
-		boolean validInput = false;
 		System.out.println("This is the adjacency map for romania.");
 		System.out.println(romania);
 		System.out.println("Enter the city to start the search from");
