@@ -73,7 +73,6 @@ public class AStar {
 		g[x][y]=0;
 		while(!q.isEmpty())	{
 			Node current = q.poll();
-			System.out.println(current.x+ " " + current.y+ " " + current.f + " "+ current.g);
 			Node[] neighbor = getNeighbors(current);
 			for(int i = 0;i<neighbor.length;i++){
 				if(neighbor[i].x==-1||maze[neighbor[i].x][neighbor[i].y]=='o'){
@@ -233,8 +232,7 @@ public class AStar {
 		int x1,x2,x3,x4;
 		int y1,y2,y3,y4;
 		System.out.print(maze);
-		while(true)
-		{
+		while(true)	{
 			System.out.println("Enter the vertical (row) position of the first racer");
 			x1 = input.nextInt();
 			System.out.println("Enter the horizontal (column) position of the first racer");
@@ -243,8 +241,7 @@ public class AStar {
 				break;
 			}
 		}
-		while(true)
-		{
+		while(true)	{
 			System.out.println("Enter the vertical (row) position of the second racer");
 			x2 = input.nextInt();
 			System.out.println("Enter the horizontal (column) position of the second racer");
@@ -253,8 +250,7 @@ public class AStar {
 				break;
 			}
 		}
-		while(true)
-		{
+		while(true)	{
 			System.out.println("Enter the vertical (row) position of the third racer");
 			x3 = input.nextInt();
 			System.out.println("Enter the horizontal (column) position of the third racer");
@@ -263,8 +259,7 @@ public class AStar {
 				break;
 			}
 		}
-		while(true)
-		{
+		while(true)	{
 			System.out.println("Enter the vertical (row) position of the fourth racer");
 			x4 = input.nextInt();
 			System.out.println("Enter the horizontal (column) position of the fourth racer");
@@ -300,8 +295,7 @@ public class AStar {
 			}else if(winner[i]==winl)
 				wini.add(i+1);
 		}
-		if(wini.size()==1)
-		{
+		if(wini.size()==1)	{
 			System.out.println("The winner is racer "+wini.get(0));
 		}else{
 			System.out.print(wini.size()+" way tie between racers " + wini.remove(0));
@@ -310,8 +304,9 @@ public class AStar {
 				if(wini.size()==1)
 					System.out.print(", ");
 			}
-			System.out.print(" and "+wini.remove(0));
+			System.out.print("and "+wini.remove(0));
 		}
+		System.out.println();
 		
 		//repeated for Maze 2
 		maze = new AStar(9,9);
@@ -327,8 +322,7 @@ public class AStar {
 		
 
 		System.out.print(maze);
-		while(true)
-		{
+		while(true)	{
 			System.out.println("Enter the vertical (row) position of the first racer");
 			x1 = input.nextInt();
 			System.out.println("Enter the horizontal (column) position of the first racer");
@@ -337,8 +331,7 @@ public class AStar {
 				break;
 			}
 		}
-		while(true)
-		{
+		while(true)	{
 			System.out.println("Enter the vertical (row) position of the second racer");
 			x2 = input.nextInt();
 			System.out.println("Enter the horizontal (column) position of the second racer");
@@ -347,8 +340,7 @@ public class AStar {
 				break;
 			}
 		}
-		while(true)
-		{
+		while(true)	{
 			System.out.println("Enter the vertical (row) position of the third racer");
 			x3 = input.nextInt();
 			System.out.println("Enter the horizontal (column) position of the third racer");
@@ -357,8 +349,7 @@ public class AStar {
 				break;
 			}
 		}
-		while(true)
-		{
+		while(true)	{
 			System.out.println("Enter the vertical (row) position of the fourth racer");
 			x4 = input.nextInt();
 			System.out.println("Enter the horizontal (column) position of the fourth racer");
@@ -393,8 +384,7 @@ public class AStar {
 			}else if(winner[i]==winl)
 				wini.add(i+1);
 		}
-		if(wini.size()==1)
-		{
+		if(wini.size()==1)	{
 			System.out.println("The winner is racer "+wini.get(0));
 		}else{
 			System.out.print(wini.size()+" way tie between racers " + wini.remove(0));
@@ -403,7 +393,7 @@ public class AStar {
 				if(wini.size()==1)
 					System.out.print(", ");
 			}
-			System.out.print(" and "+wini.remove(0));
+			System.out.print("and "+wini.remove(0));
 		}
 	}
 	
