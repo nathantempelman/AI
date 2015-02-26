@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Scanner;
 
 
 public class AStar {
@@ -228,21 +229,182 @@ public class AStar {
 				= maze.maze[0][3]= maze.maze[1][4]= maze.maze[2][4]= maze.maze[3][4]= 'o';
 		maze.maze[3][3]='@';
 		
+		Scanner input = new Scanner(System.in);
+		int x1,x2,x3,x4;
+		int y1,y2,y3,y4;
 		System.out.print(maze);
+		while(true)
+		{
+			System.out.println("Enter the vertical (row) position of the first racer");
+			x1 = input.nextInt();
+			System.out.println("Enter the horizontal (column) position of the first racer");
+			y1 = input.nextInt();
+			if(y1>=0&&x1>=0&&x1<maze.height&&y1<maze.width){
+				break;
+			}
+		}
+		while(true)
+		{
+			System.out.println("Enter the vertical (row) position of the second racer");
+			x2 = input.nextInt();
+			System.out.println("Enter the horizontal (column) position of the second racer");
+			y2 = input.nextInt();
+			if(y2>=0&&x2>=0&&x2<maze.height&&y2<maze.width){
+				break;
+			}
+		}
+		while(true)
+		{
+			System.out.println("Enter the vertical (row) position of the third racer");
+			x3 = input.nextInt();
+			System.out.println("Enter the horizontal (column) position of the third racer");
+			y3 = input.nextInt();
+			if(y3>=0&&x3>=0&&x3<maze.height&&y3<maze.width){
+				break;
+			}
+		}
+		while(true)
+		{
+			System.out.println("Enter the vertical (row) position of the fourth racer");
+			x4 = input.nextInt();
+			System.out.println("Enter the horizontal (column) position of the fourth racer");
+			y4 = input.nextInt();
+			if(y4>=0&&x4>=0&&x4<maze.height&&y4<maze.width){
+				break;
+			}
+		}
+		
 		String result1, result2,result3,result4;
-		result1=maze.AstarSearch(0, 0);
-		result2=maze.AstarSearch(0, 6);
-		result3=maze.AstarSearch(6, 0);
-		result4=maze.AstarSearch(6, 6);
-		System.out.println("Top Left racer path:");
+		result1=maze.AstarSearch(x1, y1);
+		result2=maze.AstarSearch(x2, y2);
+		result3=maze.AstarSearch(x3, y3);
+		result4=maze.AstarSearch(x4, y4);
+		System.out.println("First racer path:");
 		System.out.println(result1);
-		System.out.println("Top Right racer path:");
+		System.out.println("Second racer path:");
 		System.out.println(result2);
-		System.out.println("Bottom Left racer path:");
+		System.out.println("Third racer path:");
 		System.out.println(result3);
-		System.out.println("Bottom Left racer path:");
+		System.out.println("Fourth racer path:");
 		System.out.println(result4);
 		
+		
+		int[] winner = new int[]{result1.length(),result2.length(),result3.length(),result4.length()};
+		List<Integer> wini=new ArrayList<Integer>();
+		int winl=Integer.MAX_VALUE;
+		for(int i = 0;i<winner.length;i++)	{
+			if(winner[i]<winl)	{
+				wini.clear();
+				wini.add(i+1);
+				winl=winner[i];
+			}else if(winner[i]==winl)
+				wini.add(i+1);
+		}
+		if(wini.size()==1)
+		{
+			System.out.println("The winner is racer "+wini.get(0));
+		}else{
+			System.out.print(wini.size()+" way tie between racers " + wini.remove(0));
+			while(wini.size()>1) {
+				System.out.print(", "+wini.remove(0));
+				if(wini.size()==1)
+					System.out.print(", ");
+			}
+			System.out.print(" and "+wini.remove(0));
+		}
+		
+		//repeated for Maze 2
+		maze = new AStar(9,9);
+		//add obstacles and set goal
+		maze.goalX=3;
+		maze.goalY=3;
+		maze.maze[1][1] = maze.maze[2][1] = maze.maze[3][1]= maze.maze[3][2]= maze.maze[4][2]= maze.maze[5][2]= maze.maze[5][3]= maze.maze[5][4]
+				= maze.maze[0][3]= maze.maze[1][4]= maze.maze[2][4]= maze.maze[3][4]= 'o';
+		//new obstacles
+		maze.maze[6][5] = maze.maze[2][8]= maze.maze[3][8]= maze.maze[4][8]= maze.maze[5][8]= maze.maze[6][8]
+				= maze.maze[2][7]= maze.maze[3][7]= maze.maze[4][7]= maze.maze[5][7]= maze.maze[6][7] = 'o';
+		maze.maze[3][3]='@';
+		
+
+		System.out.print(maze);
+		while(true)
+		{
+			System.out.println("Enter the vertical (row) position of the first racer");
+			x1 = input.nextInt();
+			System.out.println("Enter the horizontal (column) position of the first racer");
+			y1 = input.nextInt();
+			if(y1>=0&&x1>=0&&x1<maze.height&&y1<maze.width){
+				break;
+			}
+		}
+		while(true)
+		{
+			System.out.println("Enter the vertical (row) position of the second racer");
+			x2 = input.nextInt();
+			System.out.println("Enter the horizontal (column) position of the second racer");
+			y2 = input.nextInt();
+			if(y2>=0&&x2>=0&&x2<maze.height&&y2<maze.width){
+				break;
+			}
+		}
+		while(true)
+		{
+			System.out.println("Enter the vertical (row) position of the third racer");
+			x3 = input.nextInt();
+			System.out.println("Enter the horizontal (column) position of the third racer");
+			y3 = input.nextInt();
+			if(y3>=0&&x3>=0&&x3<maze.height&&y3<maze.width){
+				break;
+			}
+		}
+		while(true)
+		{
+			System.out.println("Enter the vertical (row) position of the fourth racer");
+			x4 = input.nextInt();
+			System.out.println("Enter the horizontal (column) position of the fourth racer");
+			y4 = input.nextInt();
+			if(y4>=0&&x4>=0&&x4<maze.height&&y4<maze.width){
+				break;
+			}
+		}
+		
+
+		result1=maze.AstarSearch(x1, y1);
+		result2=maze.AstarSearch(x2, y2);
+		result3=maze.AstarSearch(x3, y3);
+		result4=maze.AstarSearch(x4, y4);
+		System.out.println("First racer path:");
+		System.out.println(result1);
+		System.out.println("Second racer path:");
+		System.out.println(result2);
+		System.out.println("Third racer path:");
+		System.out.println(result3);
+		System.out.println("Fourth racer path:");
+		System.out.println(result4);
+		
+		
+		winner = new int[]{result1.length(),result2.length(),result3.length(),result4.length()};
+		winl=Integer.MAX_VALUE;
+		for(int i = 0;i<winner.length;i++)	{
+			if(winner[i]<winl)	{
+				wini.clear();
+				wini.add(i+1);
+				winl=winner[i];
+			}else if(winner[i]==winl)
+				wini.add(i+1);
+		}
+		if(wini.size()==1)
+		{
+			System.out.println("The winner is racer "+wini.get(0));
+		}else{
+			System.out.print(wini.size()+" way tie between racers " + wini.remove(0));
+			while(wini.size()>1) {
+				System.out.print(", "+wini.remove(0));
+				if(wini.size()==1)
+					System.out.print(", ");
+			}
+			System.out.print(" and "+wini.remove(0));
+		}
 	}
 	
 
